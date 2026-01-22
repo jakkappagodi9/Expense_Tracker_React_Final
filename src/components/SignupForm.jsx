@@ -1,5 +1,6 @@
 import React from 'react';
 import './SignupForm.css';
+import { Link } from 'react-router-dom';
 
 function SignupForm() {
   return (
@@ -15,7 +16,7 @@ function SignupForm() {
       </form>
       <div className="login-redirect">
         <p>
-          Have an account? <a href="/">Login</a>
+          Have an account? <Link to="">Login</Link>
         </p>
       </div>
     </div>

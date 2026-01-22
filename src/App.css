@@ -1,4 +1,6 @@
-body, html, .App {
+body,
+html,
+.App {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
@@ -11,5 +13,7 @@ body, html, .App {
   justify-content: center;
   align-items: center;
   height: calc(100vh - 60px);
-  background: linear-gradient(to right top, #f9f9f9 70%, #007bff 30%);
+
+
+  background: linear-gradient(to right top, #f9f9f9 80%, #007bff 80%);
 }
