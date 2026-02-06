@@ -39,6 +39,10 @@
 .signup-button:hover {
   background-color: #0056b3;
 }
+.signup-button:disabled{
+  cursor:wait;
+  opacity: 0.6;
+}
 
 .login-redirect {
   text-align: center;
