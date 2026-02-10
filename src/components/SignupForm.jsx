@@ -1,7 +1,7 @@
 import './SignupForm.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { email, set, z } from 'zod';
+import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { app } from '../config/firebase';
 import {
@@ -34,6 +34,7 @@ const signUpSchema = z
 // SignUp Component
 
 function SignupForm() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -54,7 +55,9 @@ function SignupForm() {
       const user = userCredential.user;
       try {
         await sendEmailVerification(userCredential.user);
+
         console.log('verification email sent to ', user.email);
+        navigate('/login');
       } catch (verificationError) {
         console.error('failed to send verification mail :', verificationError);
         setError('root', {
@@ -112,7 +115,7 @@ function SignupForm() {
         </form>
         <div className="login-redirect">
           <p>
-            Have an account? <Link to="">Login</Link>
+            Have an account? <Link to="/login">Login</Link>
           </p>
         </div>
       </div>
