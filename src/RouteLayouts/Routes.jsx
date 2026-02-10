@@ -4,6 +4,7 @@ import Login from '../components/Login';
 import SignupForm from '../components/SignupForm';
 import { createBrowserRouter } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
+import UpdateProfile from '../components/UpdateProfile';
 
 export const router = createBrowserRouter([
   {
@@ -15,16 +16,17 @@ export const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: '/login',
+        path: 'login',
         element: <Login />,
       },
       {
-        path: '/signup',
+        path: 'signup',
         element: <SignupForm />,
       },
       {
-        path: '/dashboard',
+        path: 'dashboard',
         element: <Dashboard />,
+        children: [{ path: 'update-profile', element: <UpdateProfile /> }],
       },
     ],
   },

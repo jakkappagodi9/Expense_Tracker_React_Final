@@ -1,0 +1,33 @@
+.dashboard-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  box-sizing: border-box;
+
+}
+
+.greet-container {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.profile-update {
+  /* Use margin-left: auto  for move right end  */
+  margin-left: auto; 
+  background-color: bisque;
+  padding: 8px 15px;
+  border-radius: 5px;
+}
+.profile-update a{
+    border: none;
+    background-color: transparent;
+    color: rgb(42, 42, 197);
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+
+}

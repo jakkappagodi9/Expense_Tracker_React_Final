@@ -1,0 +1,78 @@
+.update-profile-card {
+  padding: 20px;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.cancel-btn {
+  background: none;
+  border: 1px solid #ff7875;
+  color: #ff7875;
+  padding: 2px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.update-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 40px; 
+  flex-wrap: wrap;
+}
+
+.input-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1; 
+  min-width: 300px;
+}
+
+.input-field label {
+  font-weight: 500;
+  white-space: nowrap; }
+
+.input-field input {
+  flex-grow: 1;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  outline: none;
+}
+
+.input-field .icon {
+  color: #333;
+}
+
+.update-btn {
+  align-self: flex-start; 
+  background-color: #a37b7b; 
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.update-btn:hover {
+  background-color: #8e6868;
+}

@@ -61,52 +61,58 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit(submitLoginForm)}>
-        <h2>Login</h2>
-        {errors.email && (
-          <span style={{ color: 'red' }}>{errors.email.message}</span>
-        )}
-        <input
-          id="email"
-          {...register('email')}
-          placeholder="Email"
-          className="login-input"
-        />
-        <div className="password-field-wrapper">
-          {errors.password && (
-            <span style={{ color: 'red' }}>{errors.password.message}</span>
+    <div className="container">
+      <div className="login-container">
+        <form className="login-form" onSubmit={handleSubmit(submitLoginForm)}>
+          <h2>Login</h2>
+          {errors.email && (
+            <span style={{ color: 'red' }}>{errors.email.message}</span>
           )}
           <input
-            id="password"
-            {...register('password')}
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Password"
+            id="email"
+            {...register('email')}
+            placeholder="Email"
+            className="login-input"
           />
+          <div className="password-field-wrapper">
+            {errors.password && (
+              <span style={{ color: 'red' }}>{errors.password.message}</span>
+            )}
+            <input
+              id="password"
+              {...register('password')}
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+            />
+
+            <button
+              type="button"
+              className="password-toggle-btn"
+              onClick={togglePassword}
+            >
+              {showPassword ? <Eye size={23} /> : <EyeOff size={23} />}
+            </button>
+          </div>
 
           <button
-            type="button"
-            className="password-toggle-btn"
-            onClick={togglePassword}
+            type="submit"
+            disabled={isSubmitting}
+            className="login-button"
           >
-            {showPassword ? <Eye size={23} /> : <EyeOff size={23} />}
+            Login
           </button>
+        </form>
+
+        <div className="forgot-link">
+          <Link to="/" className="forgot-password">
+            Forgot password
+          </Link>
         </div>
-
-        <button type="submit" disabled={isSubmitting} className="login-button">
-          Login
-        </button>
-      </form>
-
-      <div className="forgot-link">
-        <Link to="/" className="forgot-password">
-          Forgot password
-        </Link>
-      </div>
-      <div className="signUp-redirect">
-        <p>
-          Don't have an account? <Link to="/signup">Sign Up</Link>
-        </p>
+        <div className="signUp-redirect">
+          <p>
+            Don't have an account? <Link to="/signup">Sign Up</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

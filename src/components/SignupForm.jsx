@@ -76,7 +76,7 @@ function SignupForm() {
     }
   };
   return (
-    <>
+    <div className="container">
       <div className="signup-container">
         <form className="signup-form" onSubmit={handleSubmit(submitForm)}>
           <h2>SignUp</h2>
@@ -119,7 +119,7 @@ function SignupForm() {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 export default SignupForm;
