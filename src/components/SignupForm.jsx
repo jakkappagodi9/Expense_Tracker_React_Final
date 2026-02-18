@@ -3,15 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { app } from '../config/firebase';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-} from 'firebase/auth';
+import { authContext } from '../context/AuthContextProvider';
 
-//Firebase Auth Instance creation
-const auth = getAuth(app);
+import { useContext } from 'react';
 
 // signUpuserSchema put outside component to avoid re initialization on re render
 const signUpSchema = z
@@ -35,6 +29,8 @@ const signUpSchema = z
 
 function SignupForm() {
   const navigate = useNavigate();
+  const { signUpWithEmailAndPassword, sendEmailVerification } =
+    useContext(authContext);
   const {
     register,
     handleSubmit,
@@ -46,8 +42,7 @@ function SignupForm() {
   });
   const submitForm = async (data) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
+      const userCredential = await signUpWithEmailAndPassword(
         data.email,
         data.password,
       );

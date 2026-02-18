@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useContext, useRef } from 'react';
 import { Github, Globe } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import './UpdateProfile.css';
-import { app } from '../config/firebase';
-import { getAuth } from 'firebase/auth';
-
-//firebase instance
-const auth = getAuth(app);
+import { authContext } from '../context/AuthContextProvider';
 
 function UpdateProfile() {
   const navigate = useNavigate();
-
+  const { updateUserProfile, getProfileDetails } = useContext(authContext);
+  const user = getProfileDetails();
+  const displayName = useRef(user.displayName);
+  const photoURL = useRef(user.photoURL);
+  const submitUpdateHandler = () => {
+    event.preventDefault();
+    const updatedName = displayName.current.value;
+    const updatedURL = photoURL.current.value;
+    updateUserProfile(updatedName, updatedURL);
+    navigate('/dashboard');
+    // console.log(`${updatedName} ${updatedURL}`);
+  };
   return (
     <div className="update-profile-card">
       <div className="card-header">
@@ -20,18 +27,28 @@ function UpdateProfile() {
         </button>
       </div>
 
-      <form className="update-form">
+      <form className="update-form" onSubmit={submitUpdateHandler}>
         <div className="form-row">
           <div className="input-field">
             <Github size={20} className="icon" />
             <label>Full Name:</label>
-            <input type="text" placeholder="Enter your name" />
+            <input
+              type="text"
+              ref={displayName}
+              defaultValue={user.displayName}
+              placeholder="Enter your name"
+            />
           </div>
 
           <div className="input-field">
             <Globe size={20} className="icon" />
             <label>Profile Photo URL:</label>
-            <input type="url" placeholder="Paste URL here" />
+            <input
+              type="url"
+              ref={photoURL}
+              placeholder="Paste URL here"
+              defaultValue={user.photoURL}
+            />
           </div>
         </div>
 

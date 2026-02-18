@@ -1,8 +1,10 @@
-import React from 'react';
-import './Navbar.css';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { authContext } from '../context/AuthContextProvider';
+import './Navbar.css';
 
 function Navbar() {
+  const { handleSignOut, isLoggedIn } = useContext(authContext);
   return (
     <nav className="navbar">
       <div className="logo">
@@ -31,6 +33,17 @@ function Navbar() {
           className={({ isActive }) => (isActive ? 'active-link' : 'link')}
         >
           About Us
+        </NavLink>
+
+        <NavLink
+          to="/login"
+          className={({ isActive }) =>
+            isActive ? 'active-link logout-link' : 'link logout-link'
+          }
+          type="button"
+          onClick={handleSignOut}
+        >
+          {isLoggedIn ? 'Logout' : 'Login'}
         </NavLink>
       </div>
     </nav>

@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { app } from '../config/firebase';
-
-// firebse auth instance
-
-const auth = getAuth(app);
+import { authContext } from '../context/AuthContextProvider';
 
 const loginSchema = z.object({
   email: z
@@ -24,6 +19,7 @@ const loginSchema = z.object({
 // Login component
 function Login() {
   const navigate = useNavigate();
+  const { logInWithEmailAndPassword } = useContext(authContext);
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -38,22 +34,19 @@ function Login() {
 
   const submitLoginForm = async (data) => {
     try {
-      const credentials = await signInWithEmailAndPassword(
-        auth,
+      const credentials = await logInWithEmailAndPassword(
         data.email,
         data.password,
       );
-      const idToken = await credentials.user.getIdToken();
-      const emailId = credentials.user.email;
-      localStorage.setItem('idToken', idToken);
-      localStorage.setItem('emailId', emailId);
-      // console.log(idToken);
+      console.log('log in successful');
       navigate('/dashboard');
     } catch (loginError) {
-      console.log(loginError);
+      console.log('Login Error object', loginError);
       if (loginError.code === 'auth/invalid-credential') {
-        setError('password', { message: 'Incorrect Credentilas' });
-        setError('email', { message: 'Invalid Credentilas' });
+        setError('password', { message: 'Incorrect Credentials' });
+        setError('email', { message: 'Invalid Credentials' });
+      } else if (loginError.code === 'auth/user-disabled') {
+        setError('email', { message: 'User blocked contact admin' });
       } else {
         setError('root', { message: 'something went wrong ' });
       }
