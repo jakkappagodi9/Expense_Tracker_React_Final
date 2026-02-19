@@ -6,6 +6,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import UpdateProfile from '../components/UpdateProfile';
 import Emailverification from '../components/Emailverification';
+import ForgotPassword from '../components/ForgotPassword';
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: 'emailverification',
         element: <Emailverification />,
+      },
+      {
+        path: 'forgotpassword',
+        element: <ForgotPassword />,
       },
       {
         path: 'dashboard',

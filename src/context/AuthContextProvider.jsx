@@ -7,7 +7,9 @@ import {
   signOut,
   sendEmailVerification,
   updateProfile,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
+import { email } from 'zod';
 
 //firebase auth instance creation
 const auth = getAuth(app);
@@ -77,6 +79,9 @@ function AuthContextProvider(props) {
   const getProfileDetails = () => {
     return JSON.parse(localStorage.getItem('authObj'));
   };
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
   const contextValue = {
     idToken,
     isLoggedIn: !!idToken,
@@ -87,6 +92,7 @@ function AuthContextProvider(props) {
     updateUserProfile,
     getProfileDetails,
     emailVerification,
+    resetPassword,
   };
 
   return (

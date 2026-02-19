@@ -31,7 +31,6 @@ function Login() {
   const togglePassword = () => {
     setShowPassword((prev) => !prev);
   };
-
   const submitLoginForm = async (data) => {
     try {
       const credentials = await logInWithEmailAndPassword(
@@ -105,7 +104,7 @@ function Login() {
         </form>
 
         <div className="forgot-link">
-          <Link to="/" className="forgot-password">
+          <Link to="/forgotpassword" className="forgot-password">
             Forgot password
           </Link>
         </div>
