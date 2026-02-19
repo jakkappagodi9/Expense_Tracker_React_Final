@@ -4,7 +4,8 @@ import { authContext } from '../context/AuthContextProvider';
 import './Navbar.css';
 
 function Navbar() {
-  const { handleSignOut, isLoggedIn } = useContext(authContext);
+  const { handleSignOut, isLoggedIn, isEmailVerified } =
+    useContext(authContext);
   return (
     <nav className="navbar">
       <div className="logo">
@@ -43,7 +44,7 @@ function Navbar() {
           type="button"
           onClick={handleSignOut}
         >
-          {isLoggedIn ? 'Logout' : 'Login'}
+          {isLoggedIn && isEmailVerified ? 'Logout' : 'Login'}
         </NavLink>
       </div>
     </nav>

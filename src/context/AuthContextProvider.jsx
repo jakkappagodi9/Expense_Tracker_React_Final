@@ -8,7 +8,6 @@ import {
   sendEmailVerification,
   updateProfile,
 } from 'firebase/auth';
-import { email, json } from 'zod';
 
 //firebase auth instance creation
 const auth = getAuth(app);
@@ -19,11 +18,13 @@ function AuthContextProvider(props) {
     const savedAuth = JSON.parse(localStorage.getItem('authObj')) || '{}';
     return savedAuth.idToken || null;
   });
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
   const handleSignOut = async () => {
     try {
       await signOut(auth);
       localStorage.removeItem('authObj');
       setIdToken(null);
+      setIsEmailVerified(false);
       console.log('user signed out successfully !!');
     } catch (signOutError) {
       console.log('Erorr signing out : ', signOutError.message);
@@ -44,6 +45,7 @@ function AuthContextProvider(props) {
       }),
     );
     setIdToken(JSON.parse(localStorage.getItem('authObj')).idToken);
+    setIsEmailVerified(credentials.user.emailVerified);
     return credentials;
   };
 
@@ -78,6 +80,7 @@ function AuthContextProvider(props) {
   const contextValue = {
     idToken,
     isLoggedIn: !!idToken,
+    isEmailVerified,
     handleSignOut,
     logInWithEmailAndPassword,
     signUpWithEmailAndPassword,
