@@ -5,6 +5,7 @@ import SignupForm from '../components/SignupForm';
 import { createBrowserRouter } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import UpdateProfile from '../components/UpdateProfile';
+import Emailverification from '../components/Emailverification';
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: 'signup',
         element: <SignupForm />,
+      },
+      {
+        path: 'emailverification',
+        element: <Emailverification />,
       },
       {
         path: 'dashboard',

@@ -44,6 +44,15 @@ function AuthContextProvider(props) {
       }),
     );
     setIdToken(JSON.parse(localStorage.getItem('authObj')).idToken);
+    return credentials;
+  };
+
+  const emailVerification = async () => {
+    if (auth.currentUser) {
+      await sendEmailVerification(auth.currentUser);
+    } else {
+      throw new Error('No user found to verify');
+    }
   };
 
   const updateUserProfile = async (displayName, photoURL) => {
@@ -72,9 +81,9 @@ function AuthContextProvider(props) {
     handleSignOut,
     logInWithEmailAndPassword,
     signUpWithEmailAndPassword,
-    sendEmailVerification,
     updateUserProfile,
     getProfileDetails,
+    emailVerification,
   };
 
   return (

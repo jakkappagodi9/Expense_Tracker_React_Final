@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { authContext } from '../context/AuthContextProvider';
-
 import { useContext } from 'react';
 
 // signUpuserSchema put outside component to avoid re initialization on re render
@@ -29,7 +28,7 @@ const signUpSchema = z
 
 function SignupForm() {
   const navigate = useNavigate();
-  const { signUpWithEmailAndPassword, sendEmailVerification } =
+  const { signUpWithEmailAndPassword, emailVerification } =
     useContext(authContext);
   const {
     register,
@@ -46,22 +45,16 @@ function SignupForm() {
         data.email,
         data.password,
       );
-
-      const user = userCredential.user;
       try {
-        await sendEmailVerification(userCredential.user);
-
-        console.log('verification email sent to ', user.email);
-        navigate('/login');
+        emailVerification();
+        navigate('/emailverification');
       } catch (verificationError) {
         console.error('failed to send verification mail :', verificationError);
         setError('root', {
           message: 'account created but verification mail not send',
         });
         return;
-        // stop here
       }
-      // Redirect the user to dashboard
     } catch (errors) {
       if (errors.code === 'auth/email-already-in-use') {
         setError('email', { message: 'This email is already registered.' });

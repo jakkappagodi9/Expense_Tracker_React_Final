@@ -1,0 +1,68 @@
+.parent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   height: calc(100vh - 60px);
+    background-color: #f8fafc;
+    font-family: 'Inter', sans-serif;
+}
+
+.card-verification {
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+
+.icon-wrapper {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.card-verification h2 {
+    color: #1e293b;
+    margin-bottom: 12px;
+    font-size: 1.5rem;
+}
+
+.card-verification p {
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+.login-btn {
+    background-color: #2563eb;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease;
+}
+
+.login-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.resend-text {
+    display: block;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: #2563eb;
+    cursor: pointer;
+    padding: 0;
+}

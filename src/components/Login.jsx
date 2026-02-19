@@ -38,13 +38,21 @@ function Login() {
         data.email,
         data.password,
       );
-      console.log('log in successful');
-      navigate('/dashboard');
+      const emailverified = credentials.user.emailVerified;
+      if (emailverified) {
+        console.log('log in successful');
+        navigate('/dashboard');
+      } else {
+        setError('email', { message: 'Email not verified please verify' });
+        // navigate('/emailverification');
+      }
     } catch (loginError) {
       console.log('Login Error object', loginError);
       if (loginError.code === 'auth/invalid-credential') {
         setError('password', { message: 'Incorrect Credentials' });
         setError('email', { message: 'Invalid Credentials' });
+      } else if (loginError.code === 'auth/user-not-found') {
+        setError('email', { message: 'Email not registered' });
       } else if (loginError.code === 'auth/user-disabled') {
         setError('email', { message: 'User blocked contact admin' });
       } else {
