@@ -9,13 +9,17 @@ import {
   updateProfile,
   sendPasswordResetEmail,
 } from 'firebase/auth';
+import { getDatabase, set, ref, child, get } from 'firebase/database';
 import { email } from 'zod';
 
 //firebase auth instance creation
 const auth = getAuth(app);
+//db
+const db = getDatabase(app);
 export const authContext = createContext(null);
 
 function AuthContextProvider(props) {
+  const user = auth.currentUser;
   const [idToken, setIdToken] = useState(() => {
     const savedAuth = JSON.parse(localStorage.getItem('authObj')) || '{}';
     return savedAuth.idToken || null;
@@ -24,7 +28,7 @@ function AuthContextProvider(props) {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      localStorage.removeItem('authObj');
+      localStorage.clear();
       setIdToken(null);
       setIsEmailVerified(false);
       console.log('user signed out successfully !!');
@@ -82,11 +86,38 @@ function AuthContextProvider(props) {
   const resetPassword = (email) => {
     return sendPasswordResetEmail(auth, email);
   };
+  const onAddExpense = async (expenseList) => {
+    return await set(
+      ref(db, `root/users/${auth.currentUser.uid}/expenses`),
+      expenseList,
+    );
+  };
+
+  const fetchExpense = async (callback) => {
+    if (!auth.currentUser) {
+      console.log('NO user found skipping fetch');
+      return;
+    }
+    try {
+      const expenseRef = ref(db, `root/users/${auth.currentUser.uid}/expenses`);
+      console.log(expenseRef);
+
+      const snapshot = await get(expenseRef);
+      if (snapshot.exists) {
+        callback(snapshot.val());
+      } else {
+        callback([]);
+      }
+    } catch (error) {
+      console.log('Fetch error. : ', error);
+    }
+  };
 
   const contextValue = {
     idToken,
     isLoggedIn: !!idToken,
     isEmailVerified,
+    user,
     handleSignOut,
     logInWithEmailAndPassword,
     signUpWithEmailAndPassword,
@@ -94,6 +125,8 @@ function AuthContextProvider(props) {
     getProfileDetails,
     emailVerification,
     resetPassword,
+    onAddExpense,
+    fetchExpense,
   };
 
   return (

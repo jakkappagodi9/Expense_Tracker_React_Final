@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { use, useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,8 +20,9 @@ const expenseSchema = z.object({
   amount: z.coerce.number().positive('Amount must be a positive number'),
 });
 
-function ExpenseForm({ onAddExpense }) {
-  const { isLoggedIn } = useContext(authContext);
+function ExpenseForm() {
+  const { isLoggedIn, onAddExpense, user, fetchExpense } =
+    useContext(authContext);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [expenseList, setexpenseList] = useState(() => {
@@ -31,6 +32,14 @@ function ExpenseForm({ onAddExpense }) {
     const savedExpenses = localStorage.getItem(`expenses`);
     return savedExpenses ? JSON.parse(savedExpenses) : [];
   });
+
+  useEffect(() => {
+    if (isLoggedIn && user) {
+      fetchExpense((data) => {
+        setexpenseList(data);
+      });
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -51,7 +60,8 @@ function ExpenseForm({ onAddExpense }) {
 
   const onFormSubmit = async (data) => {
     try {
-      //   await onAddExpense(data);
+      const updatedList = [...expenseList, data];
+      await onAddExpense(updatedList);
       setexpenseList((prev) => [...prev, data]);
       toast.success('Expense Saved!');
       reset();
