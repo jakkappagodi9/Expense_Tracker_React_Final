@@ -1,0 +1,80 @@
+.expense-list-container {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  margin: 10px auto;
+  max-width: 900px;
+  overflow: hidden;
+}
+
+.list-header {
+  padding: 16px 24px;
+  background: #f8fafc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.expense-table th {
+  padding: 12px 24px;
+  background: #fcfcfd;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.expense-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.95rem;
+  color: #1e293b;
+}
+
+.expense-table tr:hover {
+  background-color: #f8fafc;
+}
+
+.description-cell {
+  font-weight: 500;
+}
+
+.amount-cell {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.category-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Category Specific Colors */
+.food { background: #ffedd5; color: #9a3412; }
+.petrol { background: #dcfce7; color: #166534; }
+.rent { background: #fee2e2; color: #991b1b; }
+.education { background: #e0e7ff; color: #3730a3; }
+.other { background: #f1f5f9; color: #475569; }
+
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+.empty-state {
+  text-align: center;
+  padding: 40px !important;
+  color: #94a3b8;
+}

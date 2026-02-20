@@ -82,6 +82,7 @@ function AuthContextProvider(props) {
   const resetPassword = (email) => {
     return sendPasswordResetEmail(auth, email);
   };
+
   const contextValue = {
     idToken,
     isLoggedIn: !!idToken,

@@ -3,6 +3,7 @@ import './Emailverification.css';
 import { useNavigate } from 'react-router-dom';
 import { authContext } from '../context/AuthContextProvider';
 import { email } from 'zod';
+import toast from 'react-hot-toast';
 
 function Emailverification() {
   const navigator = useNavigate();
@@ -12,7 +13,7 @@ function Emailverification() {
   };
   const handleResendEmail = async () => {
     await emailVerification();
-    alert('Verification mail resent!! check your inbox');
+    toast.success('Verification mail resent!! check your inbox');
   };
   return (
     <div className="parent-container">

@@ -1,0 +1,114 @@
+.parent-card{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+.card-header {
+    padding: 24px 40px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.toggle-trigger-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.toggle-trigger-btnr:hover {
+    background-color: #1d4ed8;
+}
+
+/* The Collapsible Logic */
+.collapsible-wrapper {
+    display: grid;
+    grid-template-rows: 0fr; /* Collapsed state */
+    max-width: 700px;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expense-card.is-open .collapsible-wrapper {
+    grid-template-rows: 1fr;
+    max-width: 700px;    
+}
+
+.collapsible-content {
+    overflow: hidden;
+}
+.collapsible-content form {
+    padding: 0px 40px 40px 40px ;
+}
+
+.form-field {
+margin-bottom: 24px;
+display: flex;
+flex-direction: column;
+}
+.form-field label {
+font-size: 0.95rem;
+font-weight: 600;
+color: #334155;
+margin-bottom: 10px;
+}
+
+.form-field input,
+.form-field select {
+padding: 14px 16px;
+border: 1.5px solid #cbd5e1;
+border-radius: 10px;
+font-size: 1rem;
+background-color: #fcfcfd;
+transition: all 0.2s ease;
+}
+.form-field input:focus,
+.form-field select:focus {
+outline: none;
+border-color: #2563eb;
+background-color: #ffffff;
+box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+.form-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 20px;
+}
+.input-error {
+border-color: #ef4444 !important;
+}
+.error-msg {
+color: #ef4444;
+font-size: 0.85rem;
+margin-top: 6px;
+font-weight: 500;
+}
+.submit-btn {
+width: 100%;
+padding: 16px;
+background-color: #2563eb;
+color: white;
+font-size: 1.1rem;
+font-weight: 700;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+transition: transform 0.1s, background-color 0.2s;
+margin-top: 10px;
+}
+.submit-btn:hover {
+background-color: #1d4ed8;
+}
+.submit-btn:active {
+transform: scale(0.98);
+}
+.submit-btn:disabled {
+background-color: #94a3b8;
+cursor: not-allowed;
+}

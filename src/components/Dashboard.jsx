@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import './Dashboard.css';
+import ExpenseForm from './ExpenseForm';
 
 function Dashboard() {
   return (
@@ -14,6 +15,7 @@ function Dashboard() {
       </div>
       <div>
         <Outlet />
+        <ExpenseForm />
       </div>
     </>
   );
